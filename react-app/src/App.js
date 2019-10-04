@@ -1,55 +1,55 @@
 import React, { useState } from 'react';
-import Dashboard from "./Components/Dashboard";
-import Display from "./Components/Display";
+// import Dashboard from "./Components/Dashboard";
+import { Display } from "./Display";
 import './App.css';
 
 function App() {
-   const [strikes, setStrikes] = useState(0);
-   const [balls, setBalls] = useState(0);
-   
-   const addStrike = currentStrikes => {
-     if (currentStrikes >= 2) {
-       return 0;
-     } else { 
-       return currentStrkies + 1;
-    }
-   };
-  
-   const addBall = currentBalls => {
-     if (currentBalls >= 3){
-       return 0;
-     } else {
-      return currentBalls + 1;
-     } 
-   };
+  const [ball, setBall] = useState(0);
+  const [strike, setStrike] = useState(0);
 
-   const foulBall = currentStrikes => {
-    if (currentBalls >= 2){
-      return currentStrikes;
-    } else {
-      return currentStrikes + 1;
+  const handleStrike = () => {
+    setStrike(strike+1);
+    if (ball === 4 || strike === 3) {
+      setBall(0);
+      setStrike(0);
     }
   };
-  
 
-   const addBall = currentBalls
+  const handleBall = () => {
+    setBall(ball+1);
+    if (ball === 4 || strike === 3) {
+      setBall(0);
+      setStrike(0);
+    }
+  };
+
+  const handleHit = () => {
+    setBall(0);
+    setStrike(0);
+  };
+
+  const handleFoul = () => {
+    if(strike < 2) {
+      setStrike(strike + 1); 
+    }
+  };
+
   return (
     <div className="App">
+      <Display ball={ball} strike={strike}></Display>
       <h1>Baseball Dashboard</h1>
       <div className="display">
-        <div className="strikes">Strikes: {strikes} </div>
-        <div className="balls">Balls: {balls}</div>
         <div className="dashbboard-buttons">
-          <button onClick={() => setStrikes(addStrike(strikes))} className="strike">
+          <button onClick={handleStrike} className="strike">
             Strike
           </button>
-          <button onClick={() => setBalls(addBall(balls))} className="ball">
+          <button onClick={handleBall} className="ball">
             Ball
           </button>
-          <button onClick={() => setStrikes(hit(strikes), setBalls(hit(balls)))} className="hit">
+          <button onClick={handleHit} className="hit">
             Hit 
           </button>
-          <button onClick={() => setStrikes(foulBall(strikes))} className="foul">
+          <button onClick={handleFoul} className="foul">
             Foul
           </button>
         </div>
