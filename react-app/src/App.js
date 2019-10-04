@@ -36,8 +36,8 @@ function App() {
 
   return (
     <div className="App">
+       <h1>Baseball Dashboard</h1>
       <Display ball={ball} strike={strike}></Display>
-      <h1>Baseball Dashboard</h1>
       <div className="display">
         <div className="dashbboard-buttons">
           <button onClick={handleStrike} className="strike">
@@ -57,8 +57,6 @@ function App() {
     </div>
   );
 }
-
-
 
 
 export default App;
